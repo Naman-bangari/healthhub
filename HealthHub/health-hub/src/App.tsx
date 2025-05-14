@@ -1,0 +1,88 @@
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import Home from "./components/Home";
+import Diaganose from "./components/Diagonose";
+import AboutUs from "./components/AboutUs";
+import Pneumonia from "./components/Pneumonia-diagnose";
+import Fracture from "./components/Fracture";
+import Eyecataract from "./components/Eyecataract";
+import SkinPredictor from "./components/SkinPredictor";
+import SimpleWebcam from "./components/SimpleWebcam";
+
+const App: React.FC = () => {
+  const location = useLocation(); 
+  useEffect(() => {
+    const navbarNav = document.getElementById("navbarNav");
+
+    if (navbarNav) {
+      document.addEventListener("click", (event) => {
+        if (
+          navbarNav.classList.contains("show") &&
+          !(event.target as HTMLElement).closest(".navbar-toggler")
+        ) {
+          navbarNav.classList.remove("show");
+        }
+      });
+    }
+  }, []);
+
+  const isLiveCamPage = location.pathname === "/live-cam";
+
+  return (
+    <>
+      {!isLiveCamPage && (
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container">
+            <Link className="navbar-brand" to="/">HealthHub</Link>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav ms-auto">
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/home">Home</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/diaganose">Diaganose</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link active" to="/aboutUs">AboutUs</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      )}
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/home' element={<Home/>}></Route>
+        <Route index element={<Home/>}></Route>
+        <Route path='/aboutUs' element={<AboutUs/>}></Route>
+        <Route path='/diaganose' element={<Diaganose/>}></Route>
+        <Route path="/pneumonia-diagnose" element={<Pneumonia/>}></Route>
+        <Route path="/fracture-diagnose" element={<Fracture/>}></Route>
+        <Route path="/eye-cataract-diagnose" element={<Eyecataract/>}></Route>
+        <Route path="/skin-diagnose" element={<SkinPredictor/>}></Route>
+        <Route path="/live-cam" element={<SimpleWebcam/>}></Route>
+      </Routes>
+    </>
+  );
+};
+
+const Root: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+};
+
+export default Root;
