@@ -15,7 +15,7 @@ const Home: React.FC = () => {
           Empowering you with smart tools to stay healthier every day.
         </p>
         <div className="d-flex justify-content-center gap-3 mt-4">
-          <button className="btn btn-success btn-lg">Get Started</button>
+          <button className="btn btn-success btn-lg" onClick={() => navigate('/login')}>Get Started</button>
           <button className="btn btn-outline-success btn-lg" onClick={handleLearnMoreClick}>
             Learn More
           </button>

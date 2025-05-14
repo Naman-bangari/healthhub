@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
 import Home from "./components/Home";
 import Diaganose from "./components/Diagonose";
@@ -8,9 +14,13 @@ import Fracture from "./components/Fracture";
 import Eyecataract from "./components/Eyecataract";
 import SkinPredictor from "./components/SkinPredictor";
 import SimpleWebcam from "./components/SimpleWebcam";
+import LoginSignup from "./components/LoginSignup";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 const App: React.FC = () => {
-  const location = useLocation(); 
+  const location = useLocation();
+
   useEffect(() => {
     const navbarNav = document.getElementById("navbarNav");
 
@@ -62,16 +72,61 @@ const App: React.FC = () => {
         </nav>
       )}
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/home' element={<Home/>}></Route>
-        <Route index element={<Home/>}></Route>
-        <Route path='/aboutUs' element={<AboutUs/>}></Route>
-        <Route path='/diaganose' element={<Diaganose/>}></Route>
-        <Route path="/pneumonia-diagnose" element={<Pneumonia/>}></Route>
-        <Route path="/fracture-diagnose" element={<Fracture/>}></Route>
-        <Route path="/eye-cataract-diagnose" element={<Eyecataract/>}></Route>
-        <Route path="/skin-diagnose" element={<SkinPredictor/>}></Route>
-        <Route path="/live-cam" element={<SimpleWebcam/>}></Route>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
+        <Route path="/login" element={<LoginSignup />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/diaganose"
+          element={
+            <ProtectedRoute>
+              <Diaganose />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/pneumonia-diagnose"
+          element={
+            <ProtectedRoute>
+              <Pneumonia />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/fracture-diagnose"
+          element={
+            <ProtectedRoute>
+              <Fracture />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/eye-cataract-diagnose"
+          element={
+            <ProtectedRoute>
+              <Eyecataract />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/skin-diagnose"
+          element={
+            <ProtectedRoute>
+              <SkinPredictor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/live-cam"
+          element={
+            <ProtectedRoute>
+              <SimpleWebcam />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
@@ -79,9 +134,11 @@ const App: React.FC = () => {
 
 const Root: React.FC = () => {
   return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
