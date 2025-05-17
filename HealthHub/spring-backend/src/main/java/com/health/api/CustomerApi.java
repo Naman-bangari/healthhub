@@ -70,6 +70,7 @@ public class CustomerApi {
 				HttpStatus.OK);
 	}
 
+	// TODO
 	@PutMapping("/updateDetection/{customerId}")
 	public ResponseEntity<Boolean> putDetails(@PathVariable Integer customerId,
 			@RequestBody DetectionUpdateRequest detection)
