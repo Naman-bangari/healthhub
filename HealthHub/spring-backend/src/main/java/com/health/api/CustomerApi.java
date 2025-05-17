@@ -4,19 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.health.dto.CustomerDTO;
+import com.health.dto.DetectionUpdateRequest;
 import com.health.exception.HealthHubException;
 import com.health.service.CustomerService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/health")
 public class CustomerApi {
@@ -57,4 +61,24 @@ public class CustomerApi {
 		CustomerDTO customer = customerService.saveCustomer(customerDTO);
 		return new ResponseEntity<>(customer, HttpStatus.CREATED);
 	}
+
+	@GetMapping("/checkAuth/{email}/{password}")
+	public ResponseEntity<Integer> checkAuth(@PathVariable String email,
+			@PathVariable String password) throws HealthHubException {
+
+		return new ResponseEntity<>(customerService.checkAuth(email, password),
+				HttpStatus.OK);
+	}
+
+	@PutMapping("/updateDetection/{customerId}")
+	public ResponseEntity<Boolean> putDetails(@PathVariable Integer customerId,
+			@RequestBody DetectionUpdateRequest detection)
+			throws HealthHubException {
+
+		boolean success = customerService.updateDetection(customerId,
+				detection);
+
+		return new ResponseEntity<>(success, HttpStatus.OK);
+	}
+
 }

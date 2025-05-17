@@ -23,7 +23,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 const App: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, logout, user } = useAuth(); // ✅ Safe now
+  const { isAuthenticated, logout, user } = useAuth(); 
 
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
