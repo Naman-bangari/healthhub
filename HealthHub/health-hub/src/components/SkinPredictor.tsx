@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import * as tmImage from '@teachablemachine/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { div } from '@tensorflow/tfjs';
 
 type Prediction = {
   className: string;
