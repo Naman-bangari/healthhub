@@ -80,8 +80,11 @@ const App: React.FC = () => {
                       <button className="btn btn-success" onClick={handleLogout}>Logout</button>
                     </li>
                     <li className="nav-item ms-2">
-                      <Link className="nav-link active" to="/report">ID: {user?.customerId}</Link>
+                      <Link className="btn btn-secondary fw-bold " to="/report">
+                        RPT
+                      </Link>
                     </li>
+
                   </>
                 ) : (
                   <li className="nav-item ms-1">
