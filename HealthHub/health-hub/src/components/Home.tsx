@@ -46,7 +46,7 @@ const Home: React.FC = () => {
               <p className="card-text text-muted">
                 Calculate your BMI and get a wellness score (1-10) using your steps, heart rate, and personal data.
               </p>
-              <Link to="/aboutUs" className="btn btn-outline-success">
+              <Link to="/symptoms" className="btn btn-outline-success">
                 Check Your Score
               </Link>
             </div>

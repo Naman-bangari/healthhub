@@ -19,6 +19,7 @@ import SimpleWebcam from "./components/SimpleWebcam";
 import LoginSignup from "./components/LoginSignup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import ChatBotPage from "./components/ChatBotPage";
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -103,6 +104,7 @@ const App: React.FC = () => {
         <Route path="/eye-cataract-diagnose" element={<ProtectedRoute><Eyecataract /></ProtectedRoute>} />
         <Route path="/skin-diagnose" element={<ProtectedRoute><SkinPredictor /></ProtectedRoute>} />
         <Route path="/live-cam" element={<ProtectedRoute><SimpleWebcam /></ProtectedRoute>} />
+        <Route path="/symptoms" element={<ChatBotPage/>} />
       </Routes>
     </>
   );
