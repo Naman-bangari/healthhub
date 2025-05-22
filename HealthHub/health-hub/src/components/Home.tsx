@@ -38,16 +38,16 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Second Card (Smart Health Score) */}
+        {/* Second Card (Symptom predictor) */}
         <div className="col-md-6 mb-4">
           <div className="card h-100 shadow-black border-1">
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
-              <h5 className="card-title text-success fw-bold">Smart Health Score</h5>
+              <h5 className="card-title text-success fw-bold">Symptom Predictor</h5>
               <p className="card-text text-muted">
-                Calculate your BMI and get a wellness score (1-10) using your steps, heart rate, and personal data.
+                Select your symptoms and get instant predictions about possible diseases along with detailed descriptions and precautions.
               </p>
               <Link to="/symptoms" className="btn btn-outline-success">
-                Check Your Score
+                Predict Now
               </Link>
             </div>
           </div>

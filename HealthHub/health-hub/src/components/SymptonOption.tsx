@@ -7,7 +7,7 @@ export type SymptomOption = {
 
 const symptomOptions: SymptomOption[] = [
     { value: "itching", label: "itching", weight: 1 },
-    { value: "skinrash", label: "skin rash", weight: 3 },
+    { value: "skin_rash", label: "skin rash", weight: 3 },
     { value: "nodal_skin_eruptions", label: "nodal skin eruptions", weight: 4 },
     { value: "continuous_sneezing", label: "continuous sneezing", weight: 4 },
     { value: "shivering", label: "shivering", weight: 5 },
@@ -138,7 +138,7 @@ const symptomOptions: SymptomOption[] = [
     { value: "blister", label: "blister", weight: 5 },
     { value: "red_sore_around_nose", label: "red sore around nose", weight: 4 },
     { value: "yellow_crust_ooze", label: "yellow crust ooze", weight: 5 },
-    
+
 ];
 
 export default symptomOptions;
