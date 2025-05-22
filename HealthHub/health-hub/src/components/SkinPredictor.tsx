@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import * as tmImage from '@teachablemachine/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAuth } from '../context/AuthContext';
 
 type Prediction = {
   className: string;
@@ -57,20 +58,50 @@ const SkinPredictor: React.FC = () => {
     console.log("Image uploaded:", isImageUploaded);
   }, [isImageUploaded]);
 
+  const { isAuthenticated, logout, user } = useAuth();
 
   const predict = async () => {
     if (!model || !imageRef.current) return;
 
     setLoading(true);
 
-    const predictions = await model.predict(imageRef.current);
-    const topPrediction = predictions.reduce((a, b) =>
-      a.probability > b.probability ? a : b
-    );
-    setMaxPrediction(topPrediction);
+    try {
+      const predictions = await model.predict(imageRef.current);
+      const topPrediction = predictions.reduce((a, b) =>
+        a.probability > b.probability ? a : b
+      );
+      setMaxPrediction(topPrediction);
 
-    setLoading(false);
+      // Prepare adjusted confidence
+      let adjustedConfidence = (topPrediction.probability * 100).toFixed(2);
+
+      // Save result to backend
+      const saveResponse = await fetch(`http://localhost:8900/health/updateDetection/${user?.customerId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: 4,
+          confidence: parseFloat(adjustedConfidence),
+          type: topPrediction.className,
+        }),
+      });
+
+      if (!saveResponse.ok) {
+        throw new Error("Failed to update skin prediction data");
+      }
+
+      console.log("Skin prediction result saved successfully.");
+
+    } catch (error) {
+      console.error("Prediction error:", error);
+      setMaxPrediction(null);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div className="container py-5 d-flex justify-content-center">
@@ -100,8 +131,8 @@ const SkinPredictor: React.FC = () => {
           {maxPrediction && (
             <div
               className={`alert text-center mt-3 ${maxPrediction.className.toLowerCase() === 'normal skin'
-                  ? 'alert-info'
-                  : 'alert-danger'
+                ? 'alert-info'
+                : 'alert-danger'
                 }`}
               role="alert"
             >

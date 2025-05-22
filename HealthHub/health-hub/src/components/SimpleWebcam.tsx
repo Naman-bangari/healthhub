@@ -21,11 +21,11 @@ const SimpleWebcam: React.FC = () => {
     let stopped = false;
 
     (async () => {
-      // 1️⃣ Backend
+     
       await tf.setBackend('webgl');
       await tf.ready();
 
-      // 2️⃣ Start webcam
+      
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         streamRef.current = stream;

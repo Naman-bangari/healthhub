@@ -20,11 +20,12 @@ import LoginSignup from "./components/LoginSignup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import ChatBotPage from "./components/ChatBotPage";
+import HealthReport from "./components/HealthReport";
 
 const App: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, logout, user } = useAuth(); 
+  const { isAuthenticated, logout, user } = useAuth();
 
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
@@ -79,7 +80,7 @@ const App: React.FC = () => {
                       <button className="btn btn-success" onClick={handleLogout}>Logout</button>
                     </li>
                     <li className="nav-item ms-2">
-                      <span className="nav-link">ID: {user?.customerId}</span> 
+                      <Link className="nav-link active" to="/report">ID: {user?.customerId}</Link>
                     </li>
                   </>
                 ) : (
@@ -104,7 +105,8 @@ const App: React.FC = () => {
         <Route path="/eye-cataract-diagnose" element={<ProtectedRoute><Eyecataract /></ProtectedRoute>} />
         <Route path="/skin-diagnose" element={<ProtectedRoute><SkinPredictor /></ProtectedRoute>} />
         <Route path="/live-cam" element={<ProtectedRoute><SimpleWebcam /></ProtectedRoute>} />
-        <Route path="/symptoms" element={<ProtectedRoute><ChatBotPage/></ProtectedRoute>} />
+        <Route path="/symptoms" element={<ProtectedRoute><ChatBotPage /></ProtectedRoute>} />
+        <Route path="/report" element={<ProtectedRoute><HealthReport /></ProtectedRoute>} />
       </Routes>
     </>
   );

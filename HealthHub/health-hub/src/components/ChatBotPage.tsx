@@ -48,67 +48,67 @@ const ChatBotPage: React.FC = () => {
 
   return (
     <div className="container my-5" style={{ maxWidth: '700px' }}>
-  <h2 className="text-center mb-4">Disease Predictor</h2>
+      <h2 className="text-center mb-4 display-3 ">Disease Predictor</h2>
 
-  <form onSubmit={handleSubmit} className="border p-4 rounded bg-light shadow-sm">
-    <div className="mb-3">
-      <label className="form-label fw-semibold">Select Symptoms:</label>
-      <SymptomSelector
-        value={selectedSymptoms}
-        onChange={setSelectedSymptoms}
-        symptomOptions={symptomOptions}
-      />
-      <small className="form-text text-muted">You can select multiple symptoms.</small>
-    </div>
-
-    <button
-      type="submit"
-      className="btn btn-primary w-100 py-2"
-      disabled={loading}
-    >
-      {loading && (
-        <span
-          className="spinner-border spinner-border-sm me-2"
-          role="status"
-          aria-hidden="true"
-        ></span>
-      )}
-      {loading ? "Predicting..." : "Predict"}
-    </button>
-  </form>
-
-  {error && (
-    <div className="alert alert-danger mt-4 d-flex align-items-center" role="alert">
-      <span className="me-2">❌</span> {error}
-    </div>
-  )}
-
-  {response && response.diseases.length > 0 && (
-    <div className="mt-4">
-      {response.diseases.map((disease) => (
-        <div key={disease} className="card mb-3 shadow-sm rounded">
-          <div className="card-body">
-            <h5 className="card-title fw-bold text-dark">{disease}</h5>
-            <h6 className="mt-3 fw-semibold text-info">Description</h6>
-            <p className="mb-3 ">{response.descriptions[disease]}</p>
-            <h6 className="fw-semibold text-success">Precautions</h6>
-            <ul className="mb-0">
-              {response.precautions[disease].map((prec, idx) => (
-                <li key={idx}>{prec}</li>
-              ))}
-            </ul>
-          </div>
+      <form onSubmit={handleSubmit} className="border p-4 rounded bg-light shadow-sm ">
+        <div className="mb-3">
+          <label className="form-label fw-semibold text-success">Select Symptoms:</label>
+          <SymptomSelector
+            value={selectedSymptoms}
+            onChange={setSelectedSymptoms}
+            symptomOptions={symptomOptions}
+          />
+          <small className="form-text text-muted text-success">You can select multiple symptoms.</small>
         </div>
-      ))}
-    </div>
-  )}
 
-  {response && response.diseases.length === 0 && (
-    <div className="alert alert-warning mt-4 d-flex align-items-center" role="alert">
-      <span className="me-2">⚠️</span> No diseases matched your symptoms.
+        <button
+          type="submit"
+          className="btn btn-outline-success w-100 py-2 "
+          disabled={loading}
+        >
+          {loading && (
+            <span
+              className="spinner-border spinner-border-sm me-2"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          )}
+          {loading ? "Predicting..." : "Predict"}
+        </button>
+      </form>
+
+      {error && (
+        <div className="alert alert-danger mt-4 d-flex align-items-center" role="alert">
+          <span className="me-2">❌</span> {error}
+        </div>
+      )}
+
+      {response && response.diseases.length > 0 && (
+        <div className="mt-4">
+          {response.diseases.map((disease) => (
+            <div key={disease} className="card mb-3 shadow-sm rounded">
+              <div className="card-body">
+                <h5 className="card-title fw-bold text-dark">{disease}</h5>
+                <h6 className="mt-3 fw-semibold text-info">Description</h6>
+                <p className="mb-3 ">{response.descriptions[disease]}</p>
+                <h6 className="fw-semibold text-success">Precautions</h6>
+                <ul className="mb-0">
+                  {response.precautions[disease].map((prec, idx) => (
+                    <li key={idx}>{prec}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {response && response.diseases.length === 0 && (
+        <div className="alert alert-warning mt-4 d-flex align-items-center" role="alert">
+          <span className="me-2">⚠️</span> No diseases matched your symptoms.
+        </div>
+      )}
     </div>
-  )}
-</div>
 
   );
 };
