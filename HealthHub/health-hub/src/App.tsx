@@ -104,7 +104,7 @@ const App: React.FC = () => {
         <Route path="/eye-cataract-diagnose" element={<ProtectedRoute><Eyecataract /></ProtectedRoute>} />
         <Route path="/skin-diagnose" element={<ProtectedRoute><SkinPredictor /></ProtectedRoute>} />
         <Route path="/live-cam" element={<ProtectedRoute><SimpleWebcam /></ProtectedRoute>} />
-        <Route path="/symptoms" element={<ChatBotPage/>} />
+        <Route path="/symptoms" element={<ProtectedRoute><ChatBotPage/></ProtectedRoute>} />
       </Routes>
     </>
   );
