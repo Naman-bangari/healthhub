@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Fracture: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -6,6 +7,7 @@ const Fracture: React.FC = () => {
     const [prediction, setPrediction] = useState<string | null>(null);
     const [confidence, setConfidence] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
+    const { isAuthenticated, logout, user } = useAuth();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -37,6 +39,30 @@ const Fracture: React.FC = () => {
             const data = await response.json();
             setPrediction(data.prediction);
             setConfidence(data.confidence);
+
+            let adjustedConfidence = (data.confidence * 100).toFixed(2);
+            if (data.prediction !== "Fracture") {
+                adjustedConfidence = (-parseFloat(adjustedConfidence)).toFixed(2);
+            }
+
+            const updateResponse = await fetch(`http://localhost:8900/health/updateDetection/${user?.customerId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: 2,
+                    confidence: parseFloat(adjustedConfidence),
+                    type: data.prediction,
+                }),
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error("Failed to update detection data");
+            }
+
+            console.log("Detection result saved successfully.");
+
         } catch (error) {
             console.error("Prediction error:", error);
             setPrediction("Error");
@@ -45,6 +71,8 @@ const Fracture: React.FC = () => {
             setLoading(false);
         }
     };
+
+
 
     return (
         <div className="container py-5 d-flex justify-content-center">
@@ -81,13 +109,12 @@ const Fracture: React.FC = () => {
 
                 {prediction && (
                     <div
-                        className={`alert ${
-                            prediction === "Fracture"
-                                ? "alert-danger"  // Red for Fracture
-                                : prediction === "Normal"
+                        className={`alert ${prediction === "Fracture"
+                            ? "alert-danger"  // Red for Fracture
+                            : prediction === "Normal"
                                 ? "alert-info"   // Blue for Normal
                                 : "alert-secondary"  // Grey for others
-                        } mt-3`}
+                            } mt-3`}
                     >
                         <h4 className="alert-heading">Prediction: {prediction}</h4>
                         {confidence !== null && (

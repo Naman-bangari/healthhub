@@ -46,7 +46,7 @@ const AboutUs: React.FC = () => {
       </div>
 
       <div className="text-center mt-5">
-        <p className="text-muted">
+        <p className=" text-success">
           Made with ❤️ by the HealthHub team. Your health, our priority.
         </p>
       </div>

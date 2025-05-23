@@ -23,10 +23,15 @@ const LoginSignup: React.FC = () => {
       const response = await fetch(`http://localhost:8900/health/checkAuth/${email}/${password}`);
       const result = await response.json();
 
-      if (result === true) {
-        login();
+      if (result > 0) {
+        const userData = {
+          email: `${email}`,
+          customerId: `${result}`,
+        };
+        login(userData);
+
         navigate("/home");
-      } else {
+      } else if (result === -1) {
         setError("Email or password doesn't match.");
       }
     } catch (err) {
@@ -36,7 +41,7 @@ const LoginSignup: React.FC = () => {
   };
 
   const handleSignUp = async () => {
-    // Final validation before sending request
+
     if (!nameValid || !passwordValid) {
       setError("Please correct the errors above.");
       return;

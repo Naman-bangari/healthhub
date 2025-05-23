@@ -11,7 +11,7 @@ const LoginPage: React.FC<{ onLoginSuccess: () => void }> = ({ onLoginSuccess })
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      // Simulate login API call
+     
       if (email === 'test@example.com' && password === 'password') {
         onLoginSuccess();
       } else {

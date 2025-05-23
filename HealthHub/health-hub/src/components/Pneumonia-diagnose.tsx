@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const Pneumonia: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -6,7 +7,7 @@ const Pneumonia: React.FC = () => {
     const [prediction, setPrediction] = useState<string | null>(null);
     const [confidence, setConfidence] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
-
+    const { isAuthenticated, logout, user } = useAuth();
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
@@ -37,6 +38,32 @@ const Pneumonia: React.FC = () => {
             const data = await response.json();
             setPrediction(data.prediction);
             setConfidence(data.confidence);
+
+            // Adjust confidence
+            let adjustedConfidence = (data.confidence * 100).toFixed(2);
+            let finalConfidence = data.prediction === "Normal"
+                ? -parseFloat(adjustedConfidence)
+                : parseFloat(adjustedConfidence);
+
+            // Save result to backend
+            const saveResponse = await fetch(`http://localhost:8900/health/updateDetection/${user?.customerId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: 1,
+                    confidence: finalConfidence,
+                    type: data.prediction,
+                }),
+            });
+
+            if (!saveResponse.ok) {
+                throw new Error("Failed to save prediction result");
+            }
+
+            console.log("Pneumonia prediction result saved successfully.");
+
         } catch (error) {
             console.error("Prediction error:", error);
             setPrediction("Error");
@@ -45,6 +72,7 @@ const Pneumonia: React.FC = () => {
             setLoading(false);
         }
     };
+
 
     return (
         <div className="container py-5 d-flex justify-content-center">
