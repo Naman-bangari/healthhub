@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.health.dto.ConfidenceReport;
 import com.health.dto.CustomerDTO;
 import com.health.dto.DetectionUpdateRequest;
 import com.health.exception.HealthHubException;
@@ -70,16 +71,22 @@ public class CustomerApi {
 				HttpStatus.OK);
 	}
 
-	// TODO
 	@PutMapping("/updateDetection/{customerId}")
 	public ResponseEntity<Boolean> putDetails(@PathVariable Integer customerId,
 			@RequestBody DetectionUpdateRequest detection)
 			throws HealthHubException {
-
 		boolean success = customerService.updateDetection(customerId,
 				detection);
 
 		return new ResponseEntity<>(success, HttpStatus.OK);
+	}
+
+	@GetMapping("/getAllDetection/{id}")
+	public ResponseEntity<ConfidenceReport> getAllDetection(
+			@PathVariable Integer id) throws HealthHubException {
+
+		return new ResponseEntity<>(customerService.getAllDetection(id),
+				HttpStatus.OK);
 	}
 
 }

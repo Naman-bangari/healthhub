@@ -1,5 +1,6 @@
 package com.health.service;
 
+import com.health.dto.ConfidenceReport;
 import com.health.dto.CustomerDTO;
 import com.health.dto.DetectionUpdateRequest;
 import com.health.exception.HealthHubException;
@@ -13,4 +14,6 @@ public interface CustomerService {
 			throws HealthHubException;
 	public Boolean updateDetection(Integer customerId,
 			DetectionUpdateRequest detection) throws HealthHubException;
+	public ConfidenceReport getAllDetection(Integer id)
+			throws HealthHubException;
 }

@@ -3,8 +3,15 @@ package com.health.dto;
 public class DetectionUpdateRequest {
 
 	private Integer id; // Customer ID
-	private byte[] image; // Actual image bytes
 	private Float confidence; // Confidence score
+	private String type;
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public Integer getId() {
 		return id;
@@ -12,14 +19,6 @@ public class DetectionUpdateRequest {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 
 	public Float getConfidence() {

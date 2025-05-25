@@ -1,11 +1,11 @@
 package com.health.service;
 
-import java.util.Base64;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.health.dto.ConfidenceReport;
 import com.health.dto.CustomerDTO;
 import com.health.dto.DetectionUpdateRequest;
 import com.health.entity.Customer;
@@ -86,27 +86,22 @@ public class CustomerServiceImpl implements CustomerService {
 				() -> new HealthHubException("Customer not found"));
 
 		try {
-			// Decode the image from Base64
-			byte[] imageBytes = Base64.getDecoder()
-					.decode(detection.getImage());
+
 			float confidenceValue = detection.getConfidence();
 
 			switch (detection.getId()) {
 				case 1 : // Pneumonia
-					customer.setPneumoniaImage(imageBytes);
 					customer.setPneumoniaConfidence(confidenceValue);
 					break;
 				case 2 : // Fracture
-					customer.setFractureImage(imageBytes);
 					customer.setFractureConfidence(confidenceValue);
 					break;
 				case 3 : // Eye Cataract
-					customer.setEyeCataractImage(imageBytes);
 					customer.setEyeCataractConfidence(confidenceValue);
 					break;
 				case 4 : // Skin Disease
-					customer.setSkinDiseaseImage(imageBytes);
 					customer.setSkinDiseaseConfidence(confidenceValue);
+					customer.setType(detection.getType());
 					break;
 				default :
 					throw new HealthHubException("Invalid detection ID");
@@ -115,12 +110,26 @@ public class CustomerServiceImpl implements CustomerService {
 			customerRepository.save(customer);
 			return true;
 
-		} catch (IllegalArgumentException e) {
-			throw new HealthHubException("Invalid image format (not Base64)");
 		} catch (Exception e) {
 			throw new HealthHubException(
 					"Confidence value is not a valid float");
 		}
+	}
+
+	@Override
+	public ConfidenceReport getAllDetection(Integer id)
+			throws HealthHubException {
+		Customer customerEntity = customerRepository.findById(id)
+				.orElseThrow(() -> new HealthHubException(
+						"Customer with ID " + id + " not found."));
+
+		ConfidenceReport customer = new ConfidenceReport();
+		customer.setPnemonia(customerEntity.getPneumoniaConfidence());
+		customer.setSkin(customerEntity.getSkinDiseaseConfidence());
+		customer.setEye_cataract(customerEntity.getEyeCataractConfidence());
+		customer.setFracture(customerEntity.getFractureConfidence());
+		customer.setType(customerEntity.getType());
+		return customer;
 	}
 
 }
