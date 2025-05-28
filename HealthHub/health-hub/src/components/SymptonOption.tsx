@@ -1,4 +1,3 @@
-// src/data/symptomOptions.ts
 export type SymptomOption = {
     value: string;
     label: string;
