@@ -69,9 +69,9 @@ const App: React.FC = () => {
                 <li className="nav-item"><Link className="nav-link active" to="/diaganose">Diaganose</Link></li>
                 <li className="nav-item"><Link className="nav-link active" to="/aboutUs">AboutUs</Link></li>
                 <li className="nav-item mb-1">
-                  <button className={`btn ${darkMode ? "btn-secondary" : "btn-warning"} rounded-circle`} onClick={toggleDarkMode}
+                  <button className={`btn ${darkMode ? "btn-warning" : "btn-dark"} rounded-circle`} onClick={toggleDarkMode}
                     style={{ width: "40px", height: "40px", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "30px" }}>
-                    {darkMode ? "🌙" : "🌞"}
+                    {darkMode ? "🌞" : "🌙"}
                   </button>
                 </li>
                 {isAuthenticated ? (
