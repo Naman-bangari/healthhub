@@ -110,10 +110,10 @@ const Fracture: React.FC = () => {
                 {prediction && (
                     <div
                         className={`alert ${prediction === "Fracture"
-                            ? "alert-danger"  // Red for Fracture
+                            ? "alert-danger"  
                             : prediction === "Normal"
-                                ? "alert-info"   // Blue for Normal
-                                : "alert-secondary"  // Grey for others
+                                ? "alert-info"   
+                                : "alert-secondary"  
                             } mt-3`}
                     >
                         <h4 className="alert-heading">Prediction: {prediction}</h4>

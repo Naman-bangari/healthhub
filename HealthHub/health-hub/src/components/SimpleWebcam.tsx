@@ -34,7 +34,7 @@ const SimpleWebcam: React.FC = () => {
           try {
             await videoRef.current.play();
           } catch (_err) {
-            // swallow AbortError on reloads
+            
           }
         }
       } catch (err) {
@@ -42,7 +42,7 @@ const SimpleWebcam: React.FC = () => {
         return;
       }
 
-      // 3️⃣ Load model
+      
       try {
         localModel = await tmImage.load('/model/model.json', '/model/metadata.json');
         console.log('Model loaded');
@@ -53,7 +53,7 @@ const SimpleWebcam: React.FC = () => {
 
       setLoading(false);
 
-      // 4️⃣ Inference loop
+      
       const loop = (time: number) => {
         if (stopped || !videoRef.current) return;
         if (time - lastTime > 3000) {
@@ -83,7 +83,7 @@ const SimpleWebcam: React.FC = () => {
       }
       if (videoRef.current) {
         videoRef.current.pause();
-        // completely unload
+       
         videoRef.current.srcObject = null;
         videoRef.current.load();
       }

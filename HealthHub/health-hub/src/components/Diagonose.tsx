@@ -6,7 +6,7 @@ const Diagnosis: React.FC = () => {
     <div className="container py-5">
       <h2 className="display-3 text-center mb-5">Select a Diagnosis</h2>
       <div className="row justify-content-center">
-        {/* Pneumonia Detection Card */}
+
         <div className="col-md-4 mb-4">
           <div className="card shadow-lg p-3 rounded-4">
             <div className="card-body text-center">
@@ -19,7 +19,7 @@ const Diagnosis: React.FC = () => {
           </div>
         </div>
 
-        {/* Fracture Detection Card */}
+        
         <div className="col-md-4 mb-4">
           <div className="card shadow-lg p-3 rounded-4">
             <div className="card-body text-center">
@@ -32,7 +32,7 @@ const Diagnosis: React.FC = () => {
           </div>
         </div>
 
-        {/* Eye Cataract Detection Card */}
+        
         <div className="col-md-4 mb-4">
           <div className="card shadow-lg p-3 rounded-4">
             <div className="card-body text-center">
@@ -45,7 +45,7 @@ const Diagnosis: React.FC = () => {
           </div>
         </div>
 
-        {/* Skin Disease Detection Card */}
+       
         <div className="col-md-4 mb-4">
           <div className="card shadow-lg p-3 rounded-4">
             <div className="card-body text-center">

@@ -39,13 +39,13 @@ const Pneumonia: React.FC = () => {
             setPrediction(data.prediction);
             setConfidence(data.confidence);
 
-            // Adjust confidence
+            
             let adjustedConfidence = (data.confidence * 100).toFixed(2);
             let finalConfidence = data.prediction === "Normal"
                 ? -parseFloat(adjustedConfidence)
                 : parseFloat(adjustedConfidence);
 
-            // Save result to backend
+            
             const saveResponse = await fetch(`http://localhost:8900/health/updateDetection/${user?.customerId}`, {
                 method: "PUT",
                 headers: {

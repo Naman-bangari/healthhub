@@ -23,7 +23,7 @@ const Home: React.FC = () => {
       </div>
 
       <div className="row text-center">
-        {/* First Card (AI Health Diagnosis) */}
+        
         <div className="col-md-6 mb-4">
           <div className="card h-100 shadow-black border-0">
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Second Card (Symptom predictor) */}
+        
         <div className="col-md-6 mb-4">
           <div className="card h-100 shadow-black border-1">
             <div className="card-body d-flex flex-column justify-content-center align-items-center">
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      {/* Centered Third Card (Live Webcam Diagnosis) */}
+      
       <div className="row d-flex justify-content-center">
         <div className="col-md-6 mb-4">
           <div className="card h-100 shadow-black border-1">

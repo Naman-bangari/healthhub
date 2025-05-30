@@ -72,10 +72,10 @@ const SkinPredictor: React.FC = () => {
       );
       setMaxPrediction(topPrediction);
 
-      // Prepare adjusted confidence
+     
       let adjustedConfidence = (topPrediction.probability * 100).toFixed(2);
 
-      // Save result to backend
+      
       const saveResponse = await fetch(`http://localhost:8900/health/updateDetection/${user?.customerId}`, {
         method: "PUT",
         headers: {

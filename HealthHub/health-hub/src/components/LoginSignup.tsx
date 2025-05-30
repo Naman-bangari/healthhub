@@ -14,7 +14,7 @@ const LoginSignup: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState("");
 
-  // Validation states
+  
   const [nameValid, setNameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
 
@@ -83,7 +83,7 @@ const LoginSignup: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError(""); // Clear any previous error
+    setError(""); 
     if (!isSignUp) {
       handleLogin();
     } else {
@@ -102,7 +102,7 @@ const LoginSignup: React.FC = () => {
               <form onSubmit={handleSubmit}>
                 {isSignUp && (
                   <>
-                    {/* Name Field */}
+                    
                     <div className="mb-3">
                       <label className="form-label">Name</label>
                       <input
@@ -124,7 +124,7 @@ const LoginSignup: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Age Field */}
+                  
                     <div className="mb-3">
                       <label className="form-label">Age</label>
                       <input
@@ -137,7 +137,7 @@ const LoginSignup: React.FC = () => {
                       />
                     </div>
 
-                    {/* Gender Field */}
+                   
                     <div className="mb-3">
                       <label className="form-label">Gender</label>
                       <select
@@ -155,7 +155,7 @@ const LoginSignup: React.FC = () => {
                   </>
                 )}
 
-                {/* Email Field */}
+                
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">Email address</label>
                   <input
@@ -169,7 +169,7 @@ const LoginSignup: React.FC = () => {
                   />
                 </div>
 
-                {/* Password Field */}
+                
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
                   <input
@@ -193,10 +193,10 @@ const LoginSignup: React.FC = () => {
                   )}
                 </div>
 
-                {/* Error Display */}
+               
                 {error && <div className="text-danger mb-3">{error}</div>}
 
-                {/* Buttons */}
+               
                 <div className="d-flex justify-content-between">
                   <button type="submit" className="btn btn-success">
                     {isSignUp ? "Sign Up" : "Login"}

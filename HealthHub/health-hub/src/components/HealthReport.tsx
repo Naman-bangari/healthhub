@@ -29,7 +29,7 @@ interface Advice {
     precautions: string[];
 }
 
-const COLORS = ['#4caf50', '#f44336']; // green (no disease), red (disease)
+const COLORS = ['#4caf50', '#f44336']; 
 
 const HealthReport: React.FC = () => {
     const [data, setData] = useState<DetectionData | null>(null);
