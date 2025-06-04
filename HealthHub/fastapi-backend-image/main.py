@@ -37,7 +37,7 @@ def preprocess_image(image_bytes):
     image_array = np.array(image) / 255.0  # Normalize
     return np.expand_dims(image_array, axis=0)  # Add batch dimension
 
-# Reusable prediction logic
+# prediction logic
 async def predict_with_model(file: UploadFile, model, threshold: float, labels: list):
     try:
         image_bytes = await file.read()
