@@ -1,4 +1,4 @@
-# 🩺 **Health Hub**
+# 🩺 **Health-Hub**
 
 [![React](https://img.shields.io/badge/Frontend-React%2BTypeScript-blue)](https://reactjs.org/)  
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com/)  
